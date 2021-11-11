@@ -11,6 +11,30 @@
     {
       "name": "mainability_HelloWorld",
       "value": "Hello World"
+    },
+    {
+      "name": "breakssetup_description",
+      "value": "Java_Empty Ability"
+    },
+    {
+      "name": "breakssetup_HelloWorld",
+      "value": "Hello World"
+    },
+    {
+      "name": "entry_BreaksSetup",
+      "value": "entry_BreaksSetup"
+    },
+    {
+      "name": "timer_description",
+      "value": "Java_Empty Ability"
+    },
+    {
+      "name": "timer_HelloWorld",
+      "value": "Hello World"
+    },
+    {
+      "name": "entry_Timer",
+      "value": "entry_Timer"
     }
   ]
 }

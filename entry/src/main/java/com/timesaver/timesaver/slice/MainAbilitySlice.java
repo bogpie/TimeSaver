@@ -13,7 +13,7 @@ public class MainAbilitySlice extends AbilitySlice {
         super.setUIContent(ResourceTable.Layout_ability_main);
 
         Button buttonToBreaksSetup = (Button) findComponentById(ResourceTable.Id_buttonToBreaksSetup);
-//        buttonToBreaksSetup.setClickedListener(listener -> present(new BreaksSetupAbilitySlice(), new Intent()));
+        buttonToBreaksSetup.setClickedListener(listener -> present(new BreaksSetupSlice(), new Intent()));
 
         TimePicker timePicker = (TimePicker) findComponentById(ResourceTable.Id_time_picker);
         timePicker.showSecond(false);

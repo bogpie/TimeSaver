@@ -40,6 +40,24 @@
         "label": "$string:entry_MainAbility",
         "type": "page",
         "launchType": "standard"
+      },
+      {
+        "orientation": "unspecified",
+        "name": "com.timesaver.timesaver.BreaksSetup",
+        "icon": "$media:icon",
+        "description": "$string:breakssetup_description",
+        "label": "$string:entry_BreaksSetup",
+        "type": "page",
+        "launchType": "standard"
+      },
+      {
+        "orientation": "unspecified",
+        "name": "com.timesaver.timesaver.Timer",
+        "icon": "$media:icon",
+        "description": "$string:timer_description",
+        "label": "$string:entry_Timer",
+        "type": "page",
+        "launchType": "standard"
       }
     ]
   }

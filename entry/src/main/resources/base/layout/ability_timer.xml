@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectionalLayout
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    ohos:height="match_parent"
+    ohos:width="match_parent"
+    ohos:alignment="center"
+    ohos:orientation="vertical">
+
+    <StackLayout
+        ohos:height="match_parent"
+        ohos:width="match_parent"
+        ohos:layout_alignment="center">
+        <Text
+            ohos:height="match_content"
+            ohos:width="match_content"
+            ohos:text="Timer"
+            ohos:text_size="12vp"
+            ohos:layout_alignment="center"/>
+
+        <RoundProgressBar
+            ohos:id="$+id:roundProgressBar"
+            ohos:height="match_parent"
+            ohos:width="match_parent"
+            ohos:background_element="$id:buttonToBreaksSetup"
+            ohos:progress_color="green"
+            ohos:layout_alignment="center"/>
+
+
+
+    </StackLayout>
+
+
+
+
+</DirectionalLayout>

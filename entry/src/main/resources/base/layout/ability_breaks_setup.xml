@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectionalLayout
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    ohos:height="match_parent"
+    ohos:width="match_parent"
+    ohos:alignment="center"
+    ohos:orientation="vertical">
+
+    <!--
+        <Text
+            ohos:height="match_content"
+            ohos:width="match_content"
+            ohos:padding="16vp"
+            ohos:text="Pick breaks"
+            ohos:text_size="16vp"
+            />
+    -->
+
+    <DirectionalLayout
+        ohos:height="match_content"
+        ohos:width="match_content"
+        ohos:alignment="center"
+        ohos:orientation="horizontal"
+        ohos:total_weight="1"
+        ohos:padding="16vp">
+
+        <DirectionalLayout
+            ohos:height="match_content"
+            ohos:width="80vp"
+            ohos:orientation="vertical"
+            ohos:alignment="center"
+            ohos:layout_alignment="horizontal_center"
+            ohos:padding="8vp"
+            ohos:weight="0.5">
+
+            <Text
+                ohos:height="match_content"
+                ohos:width="match_content"
+                ohos:text="Breaks"
+                ohos:text_size="12vp"/>
+            <!--
+            -->
+
+            <Picker
+                ohos:height="match_content"
+                ohos:width="match_content"/>
+        </DirectionalLayout>
+
+        <DirectionalLayout
+            ohos:height="match_content"
+            ohos:width="80vp"
+            ohos:orientation="vertical"
+            ohos:alignment="center"
+            ohos:layout_alignment="horizontal_center"
+            ohos:padding="8vp"
+            ohos:weight="0.5">
+
+            <Text
+                ohos:height="match_content"
+                ohos:width="match_content"
+                ohos:text="Break time"
+                ohos:text_size="12vp"/>
+
+            <Picker
+                ohos:height="match_content"
+                ohos:width="match_content"/>
+        </DirectionalLayout>
+
+    </DirectionalLayout>
+
+    <Button
+        ohos:id="$+id:buttonToStartTime"
+        ohos:height="match_content"
+        ohos:width="match_content"
+        ohos:layout_alignment="center"
+        ohos:text="Next"
+        ohos:theme="$pattern:blueButton"
+        ohos:padding="16fp"
+        />
+
+</DirectionalLayout>
