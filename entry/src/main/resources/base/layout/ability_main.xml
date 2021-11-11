@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectionalLayout
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    ohos:height="match_parent"
+    ohos:width="match_parent"
+    ohos:alignment="center"
+    ohos:orientation="vertical">
+
+    <Text
+        ohos:height="match_content"
+        ohos:width="match_content"
+        ohos:text="Set up"
+        ohos:padding="16fp"
+        ohos:text_size="16fp"
+        />
+
+    <TimePicker
+        ohos:id="$+id:time_picker"
+        ohos:height="match_content"
+        ohos:width="match_parent"
+        ohos:normal_text_color="#007DFF"
+        ohos:normal_text_size="16fp"
+        ohos:selected_text_color="#FF9912"
+        ohos:selected_text_size="24fp"
+        ohos:operated_text_color="#FF9912"
+        ohos:selected_normal_text_margin_ratio="2"
+        ohos:wheel_mode_enabled="true"
+        ohos:selector_item_num="3"
+        />
+    <Button
+        ohos:id="$+id:buttonToBreaksSetup"
+        ohos:height="match_content"
+        ohos:width="match_content"
+        ohos:layout_alignment="horizontal_center"
+        ohos:text="Next"
+        ohos:theme="$pattern:blueButton"
+        ohos:padding="16fp"
+        />
+</DirectionalLayout>

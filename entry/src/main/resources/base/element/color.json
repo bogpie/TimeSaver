@@ -1,0 +1,16 @@
+{
+  "color": [
+    {
+      "name": "text_white",
+      "value": "#ffffff"
+    },
+    {
+      "name": "checkbox_color_on",
+      "value": "#FF19D2C3"
+    },
+    {
+      "name": "checkbox_color_off",
+      "value": "#FF000000"
+    }
+  ]
+}

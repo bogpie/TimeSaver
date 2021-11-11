@@ -1,0 +1,80 @@
+{
+  "pattern": [
+    {
+      "name":"blueButton",
+      "value":[
+        {
+          "name": "background_element",
+          "value": "$graphic:background_button"
+        },
+        {
+          "name": "bottom_padding",
+          "value": "8vp"
+        },
+        {
+          "name": "left_padding",
+          "value": "20vp"
+        },
+        {
+          "name": "margin",
+          "value": "10vp"
+        },
+        {
+          "name": "right_padding",
+          "value": "20vp"
+        },
+        {
+          "name": "text_color",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "text_size",
+          "value": "14fp"
+        },
+        {
+          "name": "top_padding",
+          "value": "8vp"
+        }
+      ]
+    },
+    {
+      "name": "checkbox_fruits",
+      "value": [
+        {
+          "name": "text_size",
+          "value": "20fp"
+        },
+        {
+          "name": "text_color_on",
+          "value": "$color:checkbox_color_on"
+        },
+        {
+          "name": "text_color_off",
+          "value": "$color:checkbox_color_off"
+        },
+        {
+          "name": "top_margin",
+          "value": "30vp"
+        }
+
+      ]
+    },
+    {
+      "name": "radio_button",
+      "value": [
+        {
+          "name": "text_color_off",
+          "value": "#808080"
+        },
+        {
+          "name": "text_color_on",
+          "value": "#00BFFF"
+        },
+        {
+          "name": "text_size",
+          "value": "20fp"
+        }
+      ]
+    }
+  ]
+}
