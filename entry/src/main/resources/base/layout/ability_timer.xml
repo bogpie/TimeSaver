@@ -23,6 +23,15 @@
             ohos:width="match_parent"
             ohos:alignment="center">
 
+            <Text
+                ohos:id="$+id:cycleType"
+                ohos:height="match_content"
+                ohos:width="match_content"
+                ohos:padding="8vp"
+                ohos:text="Work"
+                ohos:text_size="24vp"/>
+
+
             <TickTimer
                 ohos:id="$+id:ticktimer"
                 ohos:height="match_content"
@@ -37,9 +46,10 @@
                 ohos:layout_alignment="center"
                 ohos:text="Start"
                 ohos:text_alignment="center"
-                ohos:text_size="8vp"
+                ohos:text_size="16vp"
                 ohos:theme="$pattern:blueButton"
                 ohos:top_margin="12vp"
+
                 />
 
             <Button
@@ -49,16 +59,11 @@
                 ohos:layout_alignment="center"
                 ohos:text="Cancel"
                 ohos:text_alignment="center"
-                ohos:text_size="8vp"
+                ohos:text_size="12vp"
                 ohos:theme="$pattern:blueButton"
                 ohos:top_margin="12vp"
+                ohos:visibility="visible"
                 />
-
-            <Text
-                ohos:id="$+id:test"
-                ohos:height="match_content"
-                ohos:width="match_content"
-                ohos:text="test"/>
 
 
         </DirectionalLayout>

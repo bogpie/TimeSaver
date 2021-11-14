@@ -6,6 +6,7 @@
     ohos:alignment="center"
     ohos:orientation="vertical">
 
+
     <Text
         ohos:id="$+id:setUpSession"
         ohos:height="match_content"

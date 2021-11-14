@@ -21,66 +21,94 @@
         ohos:width="match_content"
         ohos:alignment="center"
         ohos:orientation="horizontal"
-        ohos:total_weight="1"
-        ohos:padding="16vp">
+        ohos:total_weight="1">
 
         <DirectionalLayout
             ohos:height="match_content"
-            ohos:width="80vp"
-            ohos:orientation="vertical"
+            ohos:width="match_content"
             ohos:alignment="center"
             ohos:layout_alignment="horizontal_center"
+            ohos:orientation="vertical"
             ohos:padding="8vp"
             ohos:weight="0.5">
 
             <Text
                 ohos:height="match_content"
                 ohos:width="match_content"
-                ohos:text="Breaks"
-                ohos:text_size="12vp"/>
+                ohos:multiple_lines="true"
+                ohos:padding="8vp"
+                ohos:text="Breaks no."
+                ohos:text_alignment="center"
+                ohos:text_size="15vp"/>
 
             <Picker
                 ohos:id="$+id:breaks"
                 ohos:height="match_content"
+                ohos:width="match_parent"
+                ohos:normal_text_color="#007DFF"
+                ohos:normal_text_size="16fp"
+                ohos:operated_text_color="#FF9912"
+                ohos:selected_normal_text_margin_ratio="2"
+                ohos:selected_text_color="#FF9912"
+                ohos:selected_text_size="24fp"
+                ohos:selector_item_num="3"
                 ohos:value="0"
-                ohos:width="match_content"/>
+                ohos:wheel_mode_enabled="true"/>
+
         </DirectionalLayout>
 
         <DirectionalLayout
             ohos:height="match_content"
             ohos:width="80vp"
-            ohos:orientation="vertical"
             ohos:alignment="center"
             ohos:layout_alignment="horizontal_center"
+            ohos:orientation="vertical"
             ohos:padding="8vp"
             ohos:weight="0.5">
+
 
             <Text
                 ohos:height="match_content"
                 ohos:width="match_content"
-                ohos:text="Break time"
-                ohos:text_size="12vp"/>
+                ohos:multiple_lines="true"
+                ohos:padding="8vp"
+                ohos:text=" Break time"
+                ohos:text_alignment="center"
+                ohos:text_size="15vp"/>
+
+            <!--            <Text
+                            ohos:height="match_content"
+                            ohos:width="match_content"
+                            ohos:text="time"
+                            ohos:text_size="16vp"/>-->
 
             <Picker
                 ohos:id="$+id:breakTime"
                 ohos:height="match_content"
-                ohos:width="match_content"
-                ohos:value="0"
-                ohos:min_value="0"
+                ohos:width="match_parent"
                 ohos:max_value="0"
-                />
+                ohos:min_value="0"
+                ohos:normal_text_color="#007DFF"
+                ohos:normal_text_size="16fp"
+                ohos:operated_text_color="#FF9912"
+                ohos:selected_normal_text_margin_ratio="2"
+                ohos:selected_text_color="#FF9912"
+                ohos:selected_text_size="24fp"
+                ohos:selector_item_num="3"
+                ohos:value="0"
+                ohos:wheel_mode_enabled="true"/>
         </DirectionalLayout>
 
     </DirectionalLayout>
 
     <Button
         ohos:id="$+id:buttonToStartTime"
-        ohos:height="match_content"
+        ohos:height="match_parent"
         ohos:width="match_content"
         ohos:layout_alignment="center"
+        ohos:padding="16fp"
         ohos:text="Next"
         ohos:theme="$pattern:blueButton"
-        ohos:padding="16fp"
         />
 
 </DirectionalLayout>
