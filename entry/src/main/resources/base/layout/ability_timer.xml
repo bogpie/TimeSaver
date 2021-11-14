@@ -31,7 +31,7 @@
                 ohos:text_size="32vp"/>
 
             <Button
-                ohos:id="$+id:start"
+                ohos:id="$+id:startButton"
                 ohos:height="match_content"
                 ohos:width="match_content"
                 ohos:layout_alignment="center"
@@ -43,7 +43,7 @@
                 />
 
             <Button
-                ohos:id="$+id:end"
+                ohos:id="$+id:cancelButton"
                 ohos:height="match_content"
                 ohos:width="match_content"
                 ohos:layout_alignment="center"

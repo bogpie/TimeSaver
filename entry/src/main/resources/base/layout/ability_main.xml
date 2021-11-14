@@ -7,9 +7,10 @@
     ohos:orientation="vertical">
 
     <Text
+        ohos:id="$+id:setUpSession"
         ohos:height="match_content"
         ohos:width="match_content"
-        ohos:text="Set up"
+        ohos:text="Set up session"
         ohos:padding="16fp"
         ohos:text_size="16fp"
         />

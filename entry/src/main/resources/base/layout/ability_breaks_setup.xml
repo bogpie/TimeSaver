@@ -38,11 +38,11 @@
                 ohos:width="match_content"
                 ohos:text="Breaks"
                 ohos:text_size="12vp"/>
-            <!--
-            -->
 
             <Picker
+                ohos:id="$+id:breaks"
                 ohos:height="match_content"
+                ohos:value="0"
                 ohos:width="match_content"/>
         </DirectionalLayout>
 
@@ -62,8 +62,13 @@
                 ohos:text_size="12vp"/>
 
             <Picker
+                ohos:id="$+id:breakTime"
                 ohos:height="match_content"
-                ohos:width="match_content"/>
+                ohos:width="match_content"
+                ohos:value="0"
+                ohos:min_value="0"
+                ohos:max_value="0"
+                />
         </DirectionalLayout>
 
     </DirectionalLayout>

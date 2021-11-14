@@ -1,16 +1,19 @@
 package com.timesaver.timesaver.slice;
 
+import com.timesaver.timesaver.BreaksSetup;
 import com.timesaver.timesaver.MainAbility;
 import com.timesaver.timesaver.ResourceTable;
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
 import ohos.aafwk.content.Operation;
 import ohos.agp.components.Button;
+import ohos.agp.components.Text;
 import ohos.agp.components.TimePicker;
 
 public class MainAbilitySlice extends AbilitySlice {
     int hour = 0;
     int minute = 0;
+    Text setUpSession;
 
     @Override
     public void onStart(Intent intent) {
@@ -33,8 +36,11 @@ public class MainAbilitySlice extends AbilitySlice {
                 }
         );
 
+        setUpSession = (Text) findComponentById(ResourceTable.Id_setUpSession);
+        setUpSession.setText("Set up session");
 
         buttonToBreaksSetup.setClickedListener(listener -> {
+/*
                     Intent passedIntent = new Intent();
 
                     Operation operation =
@@ -49,9 +55,16 @@ public class MainAbilitySlice extends AbilitySlice {
                     passedIntent.setParam("HOUR", hour);
                     passedIntent.setParam("MINUTE", hour);
 
-                    //startAbility(passedIntent);
+                    TimerSlice.targetMilliSeconds = hour * 1000;
+*/
 
-                    present(new BreaksSetupSlice(), passedIntent);
+
+                    BreaksSetupSlice.hour = hour;
+                    BreaksSetupSlice.minute = minute;
+
+                    if (hour == 0 && minute < 30) setUpSession.setText("Session too small!");
+
+                    else present(new BreaksSetupSlice(), new Intent());
                 }
         );
     }
