@@ -10,26 +10,69 @@
         ohos:height="match_parent"
         ohos:width="match_parent"
         ohos:layout_alignment="center">
-        <Text
-            ohos:height="match_content"
-            ohos:width="match_content"
-            ohos:text="Timer"
-            ohos:text_size="12vp"
-            ohos:layout_alignment="center"/>
+        <!--        <Text-->
+        <!--            ohos:height="match_content"-->
+        <!--            ohos:width="match_content"-->
+        <!--            ohos:text="Timer"-->
+        <!--            ohos:text_size="12vp"-->
+        <!--            ohos:layout_alignment="center"/>-->
+
+
+        <DirectionalLayout
+            ohos:height="match_parent"
+            ohos:width="match_parent"
+            ohos:alignment="center">
+
+            <TickTimer
+                ohos:id="$+id:ticktimer"
+                ohos:height="match_content"
+                ohos:width="match_content"
+                ohos:layout_alignment="center"
+                ohos:text_size="32vp"/>
+
+            <Button
+                ohos:id="$+id:start"
+                ohos:height="match_content"
+                ohos:width="match_content"
+                ohos:layout_alignment="center"
+                ohos:text="Start"
+                ohos:text_alignment="center"
+                ohos:text_size="8vp"
+                ohos:theme="$pattern:blueButton"
+                ohos:top_margin="12vp"
+                />
+
+            <Button
+                ohos:id="$+id:end"
+                ohos:height="match_content"
+                ohos:width="match_content"
+                ohos:layout_alignment="center"
+                ohos:text="Cancel"
+                ohos:text_alignment="center"
+                ohos:text_size="8vp"
+                ohos:theme="$pattern:blueButton"
+                ohos:top_margin="12vp"
+                />
+
+            <Text
+                ohos:id="$+id:test"
+                ohos:height="match_content"
+                ohos:width="match_content"
+                ohos:text="test"/>
+
+
+        </DirectionalLayout>
 
         <RoundProgressBar
             ohos:id="$+id:roundProgressBar"
             ohos:height="match_parent"
             ohos:width="match_parent"
             ohos:background_element="$id:buttonToBreaksSetup"
-            ohos:progress_color="green"
-            ohos:layout_alignment="center"/>
-
+            ohos:layout_alignment="center"
+            ohos:progress_color="green"/>
 
 
     </StackLayout>
-
-
 
 
 </DirectionalLayout>
