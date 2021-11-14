@@ -5,8 +5,12 @@ import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
 import ohos.agp.components.*;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.concurrent.TimeUnit;
+
+import static com.timesaver.timesaver.notification.NotificationManager.createNotification;
 
 public class TimerSlice extends AbilitySlice implements Component.ClickedListener {
     Button startButton;
@@ -28,6 +32,7 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
     static int currentCycleMilliSeconds;
 
     boolean isWork = true;
+    Text actualTimer;
 
     private int getMilliSecondsFromMidnight() {
         return LocalTime.now().toSecondOfDay() * 1000;
@@ -42,12 +47,14 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         tickTimer.start();
         startButton.setText("Pause");
         isStarted = true;
+        updateActualTimer();
     }
 
     private void pauseTimer() {
         tickTimer.stop();
         startButton.setText("Start");
         isStarted = false;
+        updateActualTimer();
     }
 
 
@@ -58,6 +65,7 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         tickTimer.setBaseTime(getMilliSecondsFromMidnight());
         tickTimer.start();
         tickTimer.stop();
+        updateActualTimer();
     }
 
     private void switchToWork() {
@@ -76,6 +84,18 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         --works;
         isWork = false;
         stopTimer();
+    }
+
+    private void updateActualTimer() {
+        LocalTime elapsedTime = LocalTime.parse(tickTimer.getText());
+        LocalTime finalTime = LocalTime.ofSecondOfDay(currentCycleMilliSeconds / 1000);
+        long remainingMillis = Duration.between(elapsedTime, finalTime).toMillis();
+
+        String actualTimerString = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(remainingMillis),
+                TimeUnit.MILLISECONDS.toMinutes(remainingMillis) % TimeUnit.HOURS.toMinutes(1),
+                TimeUnit.MILLISECONDS.toSeconds(remainingMillis) % TimeUnit.MINUTES.toSeconds(1));
+
+        actualTimer.setText(actualTimerString);
     }
 
     @Override
@@ -100,28 +120,30 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         tickTimer.start();
         tickTimer.stop();
 
+        actualTimer = (Text) findComponentById(ResourceTable.Id_actualTimer);
+        updateActualTimer();
+
         cycleType = (Text) findComponentById(ResourceTable.Id_cycleType);
 
-        TickTimer.TickListener listener = new TickTimer.TickListener() {
-            @Override
-            public void onTickTimerUpdate(TickTimer tickTimer) {
+        TickTimer.TickListener listener = tickTimer -> {
 
-                int totalPassedMilliSeconds = (previousPassedMilliSeconds + getElapsedMilliseconds());
-                int progress = (int) ((totalPassedMilliSeconds * 1.0 /  totalMilliSeconds) * 100);
+            int totalPassedMilliSeconds = (previousPassedMilliSeconds + getElapsedMilliseconds());
+            int progress = (int) ((totalPassedMilliSeconds * 1.0 /  totalMilliSeconds) * 100);
+            updateActualTimer();
 
-                roundProgressBar.setProgressValue(progress);
-                if (getElapsedMilliseconds() >= currentCycleMilliSeconds) {
-                    if (isWork) {
-                        switchToBreak();
-                    } else {
-                        switchToWork();
-                    }
-                    if (works == 0) {
-                        cycleType.setText("Finished!");
-                        isFinished = true;
-                    }
-
+            roundProgressBar.setProgressValue(progress);
+            if (getElapsedMilliseconds() >= currentCycleMilliSeconds) {
+                if (isWork) {
+                    switchToBreak();
+                } else {
+                    switchToWork();
                 }
+                if (works == 0) {
+                    cycleType.setText("Finished!");
+                    actualTimer.setText("00:00:00");
+                    isFinished = true;
+                }
+
             }
         };
         tickTimer.setTickListener(listener);
@@ -136,7 +158,6 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
     @Override
     public void onActive() {
         super.onActive();
-//        test.setText(String.valueOf(i));
     }
 
     @Override
@@ -147,6 +168,8 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
 
     @Override
     public void onClick(Component component) {
+        createNotification();
+
         if (component == startButton && !isFinished) {
             if (isStarted) {
                 pauseTimer();
