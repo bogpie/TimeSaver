@@ -8,8 +8,36 @@ import ohos.event.notification.NotificationSlot;
 import ohos.rpc.RemoteException;
 
 public class NotificationManager {
-    public static void createNotification() {
-        NotificationSlot slot = new NotificationSlot("slot_001", "slot_default", NotificationSlot.LEVEL_DEFAULT);
+
+    public enum NotificationType {
+        WORK, BREAK, FINISHED;
+    }
+
+    public static void createNotification(NotificationType type) {
+        String title;
+        String text;
+
+        switch (type) {
+            case WORK:
+                title = "Time to work!";
+                text = "Your break has finished.";
+                break;
+
+            case BREAK:
+                title = "Take a chill pill!";
+                text = "Your current work cycle is over.";
+                break;
+
+            case FINISHED:
+                title = "Session over!";
+                text =  "You have finished your working session.";
+                break;
+
+            default:
+                throw new IllegalStateException("Unexpected value: " + type);
+        }
+
+        NotificationSlot slot = new NotificationSlot("slot_001", "slot_default", NotificationSlot.LEVEL_HIGH);
         slot.setEnableVibration(true);
         slot.setLockscreenVisibleness(NotificationRequest.VISIBLENESS_TYPE_PUBLIC);
         slot.setEnableLight(true);
@@ -25,8 +53,6 @@ public class NotificationManager {
         NotificationRequest request = new NotificationRequest(notificationId);
         request.setSlotId(slot.getId());
 
-        String title = "Notification Example";
-        String text = "This is a test notification";
         NotificationRequest.NotificationNormalContent content = new NotificationRequest.NotificationNormalContent();
         content.setTitle(title)
                 .setText(text);

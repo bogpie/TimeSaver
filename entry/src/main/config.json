@@ -60,6 +60,39 @@
         "type": "page",
         "launchType": "standard"
       }
+    ],
+
+    "reqPermissions": [
+      {
+        "name": "ohos.permission.USE_WHOLE_SCREEN",
+        "reason": "Use whole screen for notification when switching to Break or Work cycle",
+        "usedScene": {
+          "ability": [
+            "com.huawei.wearable.networking.main.MainAbility"
+          ],
+          "when": "always"
+        }
+      },
+      {
+        "name": "ohos.permission.VIBRATE",
+        "reason": "Vibrate for notifications",
+        "usedScene": {
+          "ability": [
+            "com.huawei.wearable.networking.main.MainAbility"
+          ],
+          "when": "always"
+        }
+      },
+      {
+        "name": "ohos.permission.PUBLISH_AGENT_REMINDER",
+        "reason": "Remind user when to take a break / work",
+        "usedScene": {
+          "ability": [
+            "com.huawei.wearable.networking.main.MainAbility"
+          ],
+          "when": "always"
+        }
+      }
     ]
   }
 }

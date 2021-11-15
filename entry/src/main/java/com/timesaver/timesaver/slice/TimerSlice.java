@@ -1,12 +1,12 @@
 package com.timesaver.timesaver.slice;
 
 import com.timesaver.timesaver.ResourceTable;
+import com.timesaver.timesaver.notification.NotificationManager;
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
 import ohos.agp.components.*;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.concurrent.TimeUnit;
 
@@ -27,7 +27,7 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
     static int breakMinutes;
 
     static int works;
-    static int workMinutes;
+    static int workMilliseconds;
 
     static int currentCycleMilliSeconds;
 
@@ -69,15 +69,17 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
     }
 
     private void switchToWork() {
+        createNotification(NotificationManager.NotificationType.WORK);
         cycleType.setText("Work");
         previousPassedMilliSeconds += currentCycleMilliSeconds;
-        currentCycleMilliSeconds = workMinutes * 60 * 1000;
+        currentCycleMilliSeconds = workMilliseconds;
         --breaks;
         isWork = true;
         stopTimer();
     }
 
     private void switchToBreak() {
+        createNotification(NotificationManager.NotificationType.BREAK);
         cycleType.setText("Break");
         previousPassedMilliSeconds += currentCycleMilliSeconds;
         currentCycleMilliSeconds = breakMinutes * 60 * 1000;
@@ -85,6 +87,12 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         isWork = false;
         stopTimer();
     }
+
+    private void resetTimer() {
+        isWork = true;
+        stopTimer();
+    }
+
 
     private void updateActualTimer() {
         LocalTime elapsedTime = LocalTime.parse(tickTimer.getText());
@@ -98,32 +106,34 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         actualTimer.setText(actualTimerString);
     }
 
+    private void finishSession() {
+        cycleType.setText("Finished!");
+        actualTimer.setText("00:00:00");
+        isFinished = true;
+        createNotification(NotificationManager.NotificationType.FINISHED);
+    }
+
     @Override
     public void onStart(Intent intent) {
         super.onStart(intent);
         super.setUIContent(ResourceTable.Layout_ability_timer);
-        currentCycleMilliSeconds = workMinutes * 60 * 1000;
+        currentCycleMilliSeconds = workMilliseconds;
         isStarted = false;
         isWork = true;
         isFinished = false;
 
         previousPassedMilliSeconds = 0;
-        totalMilliSeconds = ((workMinutes * works + breakMinutes * breaks) * 60 * 1000);
+        totalMilliSeconds = workMilliseconds * works + breakMinutes * breaks * 60 * 1000;
 
         roundProgressBar = (RoundProgressBar) findComponentById(ResourceTable.Id_roundProgressBar);
+        cycleType = (Text) findComponentById(ResourceTable.Id_cycleType);
 
         tickTimer = (TickTimer) findComponentById(ResourceTable.Id_ticktimer);
         tickTimer.setCountDown(false);
         tickTimer.setFormat("HH:mm:ss");
 
-        tickTimer.setBaseTime(getMilliSecondsFromMidnight());
-        tickTimer.start();
-        tickTimer.stop();
-
         actualTimer = (Text) findComponentById(ResourceTable.Id_actualTimer);
         updateActualTimer();
-
-        cycleType = (Text) findComponentById(ResourceTable.Id_cycleType);
 
         TickTimer.TickListener listener = tickTimer -> {
 
@@ -139,9 +149,7 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
                     switchToWork();
                 }
                 if (works == 0) {
-                    cycleType.setText("Finished!");
-                    actualTimer.setText("00:00:00");
-                    isFinished = true;
+                    finishSession();
                 }
 
             }
@@ -153,6 +161,8 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         startButton.setText("Start");
         cancelButton = (Button) findComponentById(ResourceTable.Id_cancelButton);
         cancelButton.setClickedListener(this);
+
+        resetTimer();
     }
 
     @Override
@@ -168,8 +178,6 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
 
     @Override
     public void onClick(Component component) {
-        createNotification();
-
         if (component == startButton && !isFinished) {
             if (isStarted) {
                 pauseTimer();

@@ -65,8 +65,10 @@ public class BreaksSetupSlice extends AbilitySlice {
                     TimerSlice.breaks = breaksPicker.getValue();
                     TimerSlice.breakMinutes = breakTimePicker.getValue();
                     TimerSlice.works = breaksPicker.getValue() + 1;
-                    TimerSlice.workMinutes =
-                            (sessionMinutes - TimerSlice.breakMinutes * TimerSlice.breaks) / TimerSlice.works;
+                    TimerSlice.workMilliseconds =
+                            (int) ((sessionMinutes - TimerSlice.breakMinutes * TimerSlice.breaks) * 1.0
+                                                                        / TimerSlice.works
+                                                                        * 60 * 1000);
 
                     present(new TimerSlice(), new Intent());
                 }
