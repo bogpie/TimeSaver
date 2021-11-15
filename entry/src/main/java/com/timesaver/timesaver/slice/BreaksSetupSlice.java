@@ -22,6 +22,8 @@ public class BreaksSetupSlice extends AbilitySlice {
         Picker breakTimePicker = (Picker) findComponentById(ResourceTable.Id_breakTime);
 
         breaksPicker.setMaxValue(Math.min(9, sessionMinutes / 2));
+        breaksPicker.setValue(0);
+        breakTimePicker.setValue(0);
 
         breaksPicker.setValueChangedListener(new Picker.ValueChangedListener() {
             @Override

@@ -62,8 +62,8 @@ public class MainAbilitySlice extends AbilitySlice {
                     BreaksSetupSlice.hour = hour;
                     BreaksSetupSlice.minute = minute;
 
-                    //if (hour == 0 && minute < 30) setUpSession.setText("Session too small!");
-                    //else
+                    if (hour == 0 && minute == 0) setUpSession.setText("Session too small!");
+                    else
                         present(new BreaksSetupSlice(), new Intent());
                 }
         );
