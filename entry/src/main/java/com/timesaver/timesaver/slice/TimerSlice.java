@@ -38,12 +38,12 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         return LocalTime.now().toSecondOfDay() * 1000;
     }
 
-    private int getElapsedMilliseconds() {
+    private int getTickTimerMillis() {
         return LocalTime.parse(tickTimer.getText()).toSecondOfDay() * 1000;
     }
 
     private void startTimer() {
-        tickTimer.setBaseTime(getMilliSecondsFromMidnight() - getElapsedMilliseconds());
+        tickTimer.setBaseTime(getMilliSecondsFromMidnight() - getTickTimerMillis());
         tickTimer.start();
         startButton.setText("Pause");
         isStarted = true;
@@ -73,6 +73,11 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         cycleType.setText("Work");
         previousPassedMilliSeconds += currentCycleMilliSeconds;
         currentCycleMilliSeconds = workMilliseconds;
+        roundProgressBar.setProgressValue(previousPassedMilliSeconds);
+
+        int progress = (int) ((previousPassedMilliSeconds * 1.0 /  totalMilliSeconds) * 100);
+        roundProgressBar.setProgressValue(progress);
+
         --breaks;
         isWork = true;
         stopTimer();
@@ -83,13 +88,23 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         cycleType.setText("Break");
         previousPassedMilliSeconds += currentCycleMilliSeconds;
         currentCycleMilliSeconds = breakMinutes * 60 * 1000;
+
+        int progress = (int) ((previousPassedMilliSeconds * 1.0 /  totalMilliSeconds) * 100);
+        roundProgressBar.setProgressValue(progress);
+
         --works;
         isWork = false;
         stopTimer();
     }
 
     private void resetTimer() {
+        isStarted = false;
+        isFinished = false;
         isWork = true;
+        roundProgressBar.setProgressValue(0);
+        startButton.setText("Start");
+//        cancelButton.setText("Cancel");
+        cycleType.setText("Work");
         stopTimer();
     }
 
@@ -117,32 +132,33 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
     public void onStart(Intent intent) {
         super.onStart(intent);
         super.setUIContent(ResourceTable.Layout_ability_timer);
+
+        roundProgressBar = (RoundProgressBar) findComponentById(ResourceTable.Id_roundProgressBar);
+        cycleType = (Text) findComponentById(ResourceTable.Id_cycleType);
+        tickTimer = (TickTimer) findComponentById(ResourceTable.Id_ticktimer);
+        actualTimer = (Text) findComponentById(ResourceTable.Id_actualTimer);
+        startButton = (Button) findComponentById(ResourceTable.Id_startButton);
+        cancelButton = (Button) findComponentById(ResourceTable.Id_cancelButton);
+
+
         currentCycleMilliSeconds = workMilliseconds;
-        isStarted = false;
-        isWork = true;
-        isFinished = false;
 
         previousPassedMilliSeconds = 0;
         totalMilliSeconds = workMilliseconds * works + breakMinutes * breaks * 60 * 1000;
 
-        roundProgressBar = (RoundProgressBar) findComponentById(ResourceTable.Id_roundProgressBar);
-        cycleType = (Text) findComponentById(ResourceTable.Id_cycleType);
-
-        tickTimer = (TickTimer) findComponentById(ResourceTable.Id_ticktimer);
         tickTimer.setCountDown(false);
         tickTimer.setFormat("HH:mm:ss");
 
-        actualTimer = (Text) findComponentById(ResourceTable.Id_actualTimer);
         updateActualTimer();
 
         TickTimer.TickListener listener = tickTimer -> {
 
-            int totalPassedMilliSeconds = (previousPassedMilliSeconds + getElapsedMilliseconds());
+            int totalPassedMilliSeconds = (previousPassedMilliSeconds + getTickTimerMillis());
             int progress = (int) ((totalPassedMilliSeconds * 1.0 /  totalMilliSeconds) * 100);
             updateActualTimer();
 
             roundProgressBar.setProgressValue(progress);
-            if (getElapsedMilliseconds() >= currentCycleMilliSeconds) {
+            if (getTickTimerMillis() >= currentCycleMilliSeconds) {
                 if (isWork) {
                     switchToBreak();
                 } else {
@@ -156,10 +172,7 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         };
         tickTimer.setTickListener(listener);
 
-        startButton = (Button) findComponentById(ResourceTable.Id_startButton);
         startButton.setClickedListener(this);
-        startButton.setText("Start");
-        cancelButton = (Button) findComponentById(ResourceTable.Id_cancelButton);
         cancelButton.setClickedListener(this);
 
         resetTimer();
