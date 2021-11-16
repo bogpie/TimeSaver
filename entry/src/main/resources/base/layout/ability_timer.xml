@@ -4,19 +4,13 @@
     ohos:height="match_parent"
     ohos:width="match_parent"
     ohos:alignment="center"
+    ohos:background_element="$color:black"
     ohos:orientation="vertical">
 
     <StackLayout
         ohos:height="match_parent"
         ohos:width="match_parent"
         ohos:layout_alignment="center">
-        <!--        <Text-->
-        <!--            ohos:height="match_content"-->
-        <!--            ohos:width="match_content"-->
-        <!--            ohos:text="Timer"-->
-        <!--            ohos:text_size="12vp"-->
-        <!--            ohos:layout_alignment="center"/>-->
-
 
         <DirectionalLayout
             ohos:height="match_parent"
@@ -29,6 +23,7 @@
                 ohos:width="match_content"
                 ohos:padding="8vp"
                 ohos:text="Work"
+                ohos:text_color="$color:accent"
                 ohos:text_size="24vp"/>
 
 
@@ -36,15 +31,16 @@
                 ohos:id="$+id:ticktimer"
                 ohos:height="match_content"
                 ohos:width="match_content"
-                ohos:visibility="hide"
                 ohos:layout_alignment="center"
-                ohos:text_size="32vp"/>
+                ohos:text_size="32vp"
+                ohos:visibility="hide"/>
 
             <Text
                 ohos:id="$+id:actualTimer"
                 ohos:height="match_content"
                 ohos:width="match_content"
-                ohos:text_size="32vp"/>
+                ohos:text_size="32vp"
+                ohos:text_color="$color:accent"/>
 
             <Button
                 ohos:id="$+id:startButton"
@@ -79,11 +75,11 @@
             ohos:id="$+id:roundProgressBar"
             ohos:height="match_parent"
             ohos:width="match_parent"
-            ohos:background_element="$id:buttonToBreaksSetup"
+            ohos:divider_lines_enabled="true"
             ohos:layout_alignment="center"
-            ohos:progress_color="green"/>
-
-
+            ohos:progress_color="$color:accent"
+            ohos:progress_width="8vp"
+            />
     </StackLayout>
 
 

@@ -25,7 +25,7 @@
         },
         {
           "name": "text_color",
-          "value": "#FFFFFF"
+          "value": "black"
         },
         {
           "name": "text_size",

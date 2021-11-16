@@ -11,6 +11,18 @@
     {
       "name": "checkbox_color_off",
       "value": "#FF000000"
+    },
+    {
+      "name": "black",
+      "value": "#FF000000"
+    },
+    {
+      "name": "accent",
+      "value": "#FFF0A500"
+    },
+    {
+      "name": "faded",
+      "value": "#FF4B4C5B"
     }
   ]
 }

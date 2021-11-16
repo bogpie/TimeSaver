@@ -1,11 +1,8 @@
 package com.timesaver.timesaver.slice;
 
-import com.timesaver.timesaver.BreaksSetup;
-import com.timesaver.timesaver.MainAbility;
 import com.timesaver.timesaver.ResourceTable;
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
-import ohos.aafwk.content.Operation;
 import ohos.agp.components.Button;
 import ohos.agp.components.Text;
 import ohos.agp.components.TimePicker;
@@ -40,25 +37,6 @@ public class MainAbilitySlice extends AbilitySlice {
         setUpSession.setText("Set up session");
 
         buttonToBreaksSetup.setClickedListener(listener -> {
-/*
-                    Intent passedIntent = new Intent();
-
-                    Operation operation =
-                            new Intent.OperationBuilder()
-                                    .withBundleName(getBundleName())
-                                    .withAbilityName(MainAbility.class.getName())
-                                    .withAction("action.setTime")
-                                    .build();
-
-                    passedIntent.setOperation(operation);
-
-                    passedIntent.setParam("HOUR", hour);
-                    passedIntent.setParam("MINUTE", hour);
-
-                    TimerSlice.targetMilliSeconds = hour * 1000;
-*/
-
-
                     BreaksSetupSlice.hour = hour;
                     BreaksSetupSlice.minute = minute;
 

@@ -4,6 +4,7 @@
     ohos:height="match_parent"
     ohos:width="match_parent"
     ohos:alignment="center"
+    ohos:background_element="$color:black"
     ohos:orientation="vertical">
 
 
@@ -11,8 +12,9 @@
         ohos:id="$+id:setUpSession"
         ohos:height="match_content"
         ohos:width="match_content"
-        ohos:text="Set up session"
         ohos:padding="16fp"
+        ohos:text="Set up session"
+        ohos:text_color="$color:accent"
         ohos:text_size="16fp"
         />
 
@@ -20,22 +22,24 @@
         ohos:id="$+id:time_picker"
         ohos:height="match_content"
         ohos:width="match_parent"
-        ohos:normal_text_color="#007DFF"
+        ohos:normal_text_color="$color:faded"
         ohos:normal_text_size="16fp"
-        ohos:selected_text_color="#FF9912"
-        ohos:selected_text_size="24fp"
-        ohos:operated_text_color="#FF9912"
+        ohos:operated_text_color="$color:accent"
         ohos:selected_normal_text_margin_ratio="2"
-        ohos:wheel_mode_enabled="true"
+        ohos:selected_text_color="$color:accent"
+        ohos:selected_text_size="24fp"
         ohos:selector_item_num="3"
+        ohos:wheel_mode_enabled="true"
         />
+
     <Button
         ohos:id="$+id:buttonToBreaksSetup"
         ohos:height="match_content"
         ohos:width="match_content"
         ohos:layout_alignment="horizontal_center"
-        ohos:text="Next"
-        ohos:theme="$pattern:blueButton"
         ohos:padding="16fp"
+        ohos:text="Next"
+        ohos:text_color="$color:black"
+        ohos:theme="$pattern:blueButton"
         />
 </DirectionalLayout>

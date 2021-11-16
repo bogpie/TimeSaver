@@ -10,8 +10,6 @@ import java.time.Duration;
 import java.time.LocalTime;
 import java.util.concurrent.TimeUnit;
 
-import static com.timesaver.timesaver.notification.NotificationManager.createNotification;
-
 public class TimerSlice extends AbilitySlice implements Component.ClickedListener {
     Button startButton;
     Button cancelButton;
@@ -31,6 +29,7 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
 
     static int currentCycleMilliSeconds;
 
+    NotificationManager notificationManager;
     boolean isWork = true;
     Text actualTimer;
 
@@ -69,13 +68,13 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
     }
 
     private void switchToWork() {
-        createNotification(NotificationManager.NotificationType.WORK);
+        notificationManager.createNotification(NotificationManager.NotificationType.WORK);
         cycleType.setText("Work");
         previousPassedMilliSeconds += currentCycleMilliSeconds;
         currentCycleMilliSeconds = workMilliseconds;
         roundProgressBar.setProgressValue(previousPassedMilliSeconds);
 
-        int progress = (int) ((previousPassedMilliSeconds * 1.0 /  totalMilliSeconds) * 100);
+        int progress = (int) ((previousPassedMilliSeconds * 1.0 / totalMilliSeconds) * 100);
         roundProgressBar.setProgressValue(progress);
 
         --breaks;
@@ -84,15 +83,17 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
     }
 
     private void switchToBreak() {
-        createNotification(NotificationManager.NotificationType.BREAK);
         cycleType.setText("Break");
         previousPassedMilliSeconds += currentCycleMilliSeconds;
         currentCycleMilliSeconds = breakMinutes * 60 * 1000;
 
-        int progress = (int) ((previousPassedMilliSeconds * 1.0 /  totalMilliSeconds) * 100);
+        int progress = (int) ((previousPassedMilliSeconds * 1.0 / totalMilliSeconds) * 100);
         roundProgressBar.setProgressValue(progress);
 
         --works;
+        if (works != 0)
+            notificationManager.createNotification(NotificationManager.NotificationType.BREAK);
+
         isWork = false;
         stopTimer();
     }
@@ -103,7 +104,6 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         isWork = true;
         roundProgressBar.setProgressValue(0);
         startButton.setText("Start");
-//        cancelButton.setText("Cancel");
         cycleType.setText("Work");
         stopTimer();
     }
@@ -125,7 +125,7 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         cycleType.setText("Finished!");
         actualTimer.setText("00:00:00");
         isFinished = true;
-        createNotification(NotificationManager.NotificationType.FINISHED);
+        notificationManager.createNotification(NotificationManager.NotificationType.FINISHED);
     }
 
     @Override
@@ -140,6 +140,9 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         startButton = (Button) findComponentById(ResourceTable.Id_startButton);
         cancelButton = (Button) findComponentById(ResourceTable.Id_cancelButton);
 
+        notificationManager = new NotificationManager();
+
+        roundProgressBar.setProgressValue(12);
 
         currentCycleMilliSeconds = workMilliseconds;
 
@@ -154,7 +157,7 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         TickTimer.TickListener listener = tickTimer -> {
 
             int totalPassedMilliSeconds = (previousPassedMilliSeconds + getTickTimerMillis());
-            int progress = (int) ((totalPassedMilliSeconds * 1.0 /  totalMilliSeconds) * 100);
+            int progress = (int) ((totalPassedMilliSeconds * 1.0 / totalMilliSeconds) * 100);
             updateActualTimer();
 
             roundProgressBar.setProgressValue(progress);

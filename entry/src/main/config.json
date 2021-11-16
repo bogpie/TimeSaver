@@ -61,7 +61,6 @@
         "launchType": "standard"
       }
     ],
-
     "reqPermissions": [
       {
         "name": "ohos.permission.USE_WHOLE_SCREEN",
@@ -93,6 +92,15 @@
           "when": "always"
         }
       }
-    ]
+    ],
+    "metaData": {
+      "customizeData": [
+        {
+          "extra": "",
+          "name": "hwc-theme",
+          "value": "androidhwext:style/Theme.Emui.Translucent.NoTitleBar.Fullscreen"
+        }
+      ]
+    }
   }
 }
