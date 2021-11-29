@@ -4,6 +4,7 @@ import com.timesaver.timesaver.ResourceTable;
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
 import ohos.agp.components.Button;
+import ohos.agp.components.Component;
 import ohos.agp.components.Picker;
 
 public class BreaksSetupSlice extends AbilitySlice {
@@ -25,41 +26,23 @@ public class BreaksSetupSlice extends AbilitySlice {
         breaksPicker.setValue(0);
         breakTimePicker.setValue(0);
 
-        breaksPicker.setValueChangedListener(new Picker.ValueChangedListener() {
-            @Override
-            public void onValueChanged(Picker newBreaksPicker, int breaksLastValue, int breaksNextValue) {
-                if (breaksNextValue == 0) {
-                    breakTimePicker.setMaxValue(0);
-                    breakTimePicker.setValue(0);
-                } else {
-                    int breakTime = sessionMinutes / breaksNextValue / 2;
-                    breakTimePicker.setMaxValue(breakTime);
-                    breakTimePicker.setValue(1);
-                }
+        breaksPicker.setValueChangedListener((newBreaksPicker, breaksLastValue, breaksNextValue) -> {
+            if (breaksNextValue == 0) {
+                breakTimePicker.setMaxValue(0);
+                breakTimePicker.setValue(0);
+            } else {
+                int breakTime = sessionMinutes / breaksNextValue / 2;
+                breakTimePicker.setMaxValue(breakTime);
+                breakTimePicker.setValue(1);
             }
         });
 
-        breakTimePicker.setValueChangedListener(new Picker.ValueChangedListener() {
-            @Override
-            public void onValueChanged(Picker newBreakTimePicker, int breakTimeLastValue, int breakTimeNextValue) {
-                if (breakTimeNextValue == 0) {
-                    breaksPicker.setValue(0);
-                    breakTimePicker.setMaxValue(0);
-                }
+        breakTimePicker.setValueChangedListener((newBreakTimePicker, breakTimeLastValue, breakTimeNextValue) -> {
+            if (breakTimeNextValue == 0) {
+                breaksPicker.setValue(0);
+                breakTimePicker.setMaxValue(0);
             }
         });
-
-/*
-        if (getAbility() != null) {
-            if (getAbility().getIntent() != null) {
-                if (getAbility().getIntent().hasParameter("HOUR")) {
-                    hour = getAbility().getIntent().getIntParam("HOUR", 0);
-                    minute = getAbility().getIntent().getIntParam("MINUTE", 0);
-                }
-            }
-        }
-*/
-
 
         Button buttonToStartTime = (Button) findComponentById(ResourceTable.Id_buttonToStartTime);
         buttonToStartTime.setClickedListener(listener ->
@@ -75,6 +58,12 @@ public class BreaksSetupSlice extends AbilitySlice {
                     present(new TimerSlice(), new Intent());
                 }
         );
+
+        Button buttonToGoBack = (Button) findComponentById(ResourceTable.Id_buttonToGoBack);
+
+        buttonToGoBack.setClickedListener(listener -> {
+            present(new MainAbilitySlice(), new Intent());
+        });
 
 
     }

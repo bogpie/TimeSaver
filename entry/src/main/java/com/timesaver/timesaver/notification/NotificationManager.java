@@ -33,11 +33,11 @@ public class NotificationManager {
 
         // Check whether a specified vibrator supports a preset vibration effect.
         boolean isSupport = vibratorAgent.isEffectSupport(vibratorId,
-                VibrationPattern.VIBRATOR_TYPE_CAMERA_CLICK);
+                VibrationPattern.VIBRATOR_TYPE_CALL_RING);
 
         // Create a one-shot vibration with a specified effect.
         boolean vibrateEffectResult = vibratorAgent.startOnce(vibratorId,
-                VibrationPattern.VIBRATOR_TYPE_CAMERA_CLICK);
+                VibrationPattern.VIBRATOR_TYPE_CALL_RING);
 
         // Stop the custom vibration effect of a vibrator.
         boolean stopResult = vibratorAgent.stop(vibratorId,

@@ -5,13 +5,22 @@ apply plugin: 'com.huawei.ohos.app'
 ohos {
     signingConfigs {
         debug {
-            storeFile file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_5190040000025123707.p12')
-            storePassword '00000018E3272806B30D82DE8CDB20BC4F1B2C3DCEF0EF5B445D69F15130300803DACE0715692662'
-            keyAlias = 'debugKey'
-            keyPassword '000000184A85C6F6075C643C83668B560108BB0EE4B623D578FDD8544B0B3228C892153B070C13C3'
+            storeFile file('C:\\Huawei Files\\TimeSaver_generated.p12')
+            storePassword '0000001DA4423606C7C1BFEC56D8DC958BB191E6CDF497A8C30E46F237FE59F2907769D6F689C54626B0027153'
+            keyAlias = 'TimeSaverAlias'
+            keyPassword '0000001D32DFA2516896622ECF6915AD94DB1245E7ADF0B75DCF54175ECE9F7D752DBBA1FCAB14B3312D014801'
             signAlg = 'SHA256withECDSA'
-            profile file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_timesaver_5190040000025123707.p7b')
-            certpath file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_5190040000025123707.cer')
+            profile file('C:\\Huawei Files\\TimeSaverRelease.p7b')
+            certpath file('C:\\Huawei Files\\TimeSaverReleaseCertificate.cer')
+        }
+        release {
+            storeFile file('C:\\Huawei Files\\TimeSaver_generated.p12')
+            storePassword '0000001D584C546795F1692F08B87ABEB615CF4BD989CD12958DF0D7DDF94890469DB6250B2801F9E02D42978E'
+            keyAlias = 'TimeSaverAlias'
+            keyPassword '0000001D15A7DE9CA3379F3D9DEFC9CD3AB3B58FE4F825FFCB8B2CF08934590D449E121D9A6C776F5670CF8727'
+            signAlg = 'SHA256withECDSA'
+            profile file('C:\\Huawei Files\\TimeSaverRelease.p7b')
+            certpath file('C:\\Huawei Files\\TimeSaverReleaseCertificate.cer')
         }
     }
     compileSdkVersion 5

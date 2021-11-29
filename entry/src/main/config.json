@@ -9,6 +9,15 @@
   },
   "deviceConfig": {},
   "module": {
+    "metaData": {
+      "customizeData": [
+        {
+          "name": "hwc-theme",
+          "value": "androidhwext:style/Theme.Emui.Translucent.NoTitleBar.Fullscreen",
+          "extra": ""
+        }
+      ]
+    },
     "package": "com.timesaver.timesaver",
     "name": ".MyApplication",
     "mainAbility": "com.timesaver.timesaver.MainAbility",
@@ -92,15 +101,6 @@
           "when": "always"
         }
       }
-    ],
-    "metaData": {
-      "customizeData": [
-        {
-          "extra": "",
-          "name": "hwc-theme",
-          "value": "androidhwext:style/Theme.Emui.Translucent.NoTitleBar.Fullscreen"
-        }
-      ]
-    }
+    ]
   }
 }

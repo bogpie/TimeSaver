@@ -1,10 +1,6 @@
 {
   "color": [
     {
-      "name": "text_white",
-      "value": "#ffffff"
-    },
-    {
       "name": "checkbox_color_on",
       "value": "#FF19D2C3"
     },
@@ -14,6 +10,31 @@
     },
     {
       "name": "black",
+      "value": "#FF000000"
+    },
+    {
+      "name": "white",
+      "value": "#ffffff"
+    },
+    {
+      "name": "blackAccent",
+      "value": "#FFF0A500"
+    },
+    {
+      "name": "whiteAccent",
+      "value": "#2E5450"
+    },
+    {
+      "name": "blackFaded",
+      "value": "#FF4B4C5B"
+    },
+    {
+      "name": "whiteFaded",
+      "value": "#634B4C5B"
+    },
+
+    {
+      "name": "background",
       "value": "#FF000000"
     },
     {

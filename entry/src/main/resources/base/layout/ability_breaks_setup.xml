@@ -4,15 +4,17 @@
     ohos:height="match_parent"
     ohos:width="match_parent"
     ohos:alignment="center"
-    ohos:background_element="$color:black"
-    ohos:orientation="vertical">
+    ohos:background_element="$color:background"
+    ohos:orientation="vertical"
+    ohos:total_weight="1">
 
     <DirectionalLayout
         ohos:height="match_content"
         ohos:width="match_content"
         ohos:alignment="center"
         ohos:orientation="horizontal"
-        ohos:total_weight="1">
+        ohos:total_weight="1"
+        ohos:weight="0.80">
 
         <DirectionalLayout
             ohos:height="match_content"
@@ -31,7 +33,7 @@
                 ohos:text="Breaks no."
                 ohos:text_alignment="center"
                 ohos:text_color="$color:accent"
-                ohos:text_size="15vp"/>
+                ohos:text_size="12vp"/>
 
             <Picker
                 ohos:id="$+id:breaks"
@@ -67,7 +69,7 @@
                 ohos:text=" Break time"
                 ohos:text_alignment="center"
                 ohos:text_color="$color:accent"
-                ohos:text_size="15vp"/>
+                ohos:text_size="12vp"/>
 
             <!--            <Text
                             ohos:height="match_content"
@@ -94,15 +96,36 @@
 
     </DirectionalLayout>
 
-    <Button
-        ohos:id="$+id:buttonToStartTime"
-        ohos:height="match_parent"
+
+    <DirectionalLayout
+        ohos:height="match_content"
         ohos:width="match_content"
-        ohos:layout_alignment="center"
-        ohos:padding="16fp"
-        ohos:text="Next"
-        ohos:text_color="$color:black"
-        ohos:theme="$pattern:blueButton"
-        />
+        ohos:orientation="horizontal">
+
+        <Button
+            ohos:id="$+id:buttonToGoBack"
+            ohos:height="match_parent"
+            ohos:width="match_content"
+            ohos:layout_alignment="center"
+            ohos:text="Back"
+            ohos:text_color="$color:background"
+            ohos:text_size="10vp"
+            ohos:theme="$pattern:blueButton"
+            />
+
+        <Button
+            ohos:id="$+id:buttonToStartTime"
+            ohos:height="match_parent"
+            ohos:width="match_content"
+            ohos:layout_alignment="center"
+            ohos:text_size="10vp"
+            ohos:text="Next"
+            ohos:text_color="$color:background"
+            ohos:theme="$pattern:blueButton"
+            />
+
+
+    </DirectionalLayout>
+
 
 </DirectionalLayout>

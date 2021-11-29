@@ -4,7 +4,7 @@
     ohos:height="match_parent"
     ohos:width="match_parent"
     ohos:alignment="center"
-    ohos:background_element="$color:black"
+    ohos:background_element="$color:background"
     ohos:orientation="vertical">
 
 
@@ -39,7 +39,7 @@
         ohos:layout_alignment="horizontal_center"
         ohos:padding="16fp"
         ohos:text="Next"
-        ohos:text_color="$color:black"
+        ohos:text_color="$color:background"
         ohos:theme="$pattern:blueButton"
         />
 </DirectionalLayout>

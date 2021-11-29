@@ -5,6 +5,8 @@ import com.timesaver.timesaver.notification.NotificationManager;
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
 import ohos.agp.components.*;
+import ohos.event.notification.NotificationHelper;
+import ohos.rpc.RemoteException;
 
 import java.time.Duration;
 import java.time.LocalTime;
@@ -68,7 +70,6 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
     }
 
     private void switchToWork() {
-        notificationManager.createNotification(NotificationManager.NotificationType.WORK);
         cycleType.setText("Work");
         previousPassedMilliSeconds += currentCycleMilliSeconds;
         currentCycleMilliSeconds = workMilliseconds;
@@ -78,6 +79,9 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         roundProgressBar.setProgressValue(progress);
 
         --breaks;
+        if (breaks != 0)
+            notificationManager.createNotification(NotificationManager.NotificationType.WORK);
+
         isWork = true;
         stopTimer();
     }
@@ -198,10 +202,18 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
             if (isStarted) {
                 pauseTimer();
             } else {
+                try {
+                    NotificationHelper.cancelAllNotifications();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
                 startTimer();
             }
         }
         if (component == cancelButton) {
+            if(isStarted){
+                stopTimer();
+            }
             present(new MainAbilitySlice(), new Intent());
         }
     }

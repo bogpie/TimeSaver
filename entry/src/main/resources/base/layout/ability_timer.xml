@@ -4,7 +4,7 @@
     ohos:height="match_parent"
     ohos:width="match_parent"
     ohos:alignment="center"
-    ohos:background_element="$color:black"
+    ohos:background_element="$color:background"
     ohos:orientation="vertical">
 
     <StackLayout
@@ -48,6 +48,7 @@
                 ohos:width="match_content"
                 ohos:layout_alignment="center"
                 ohos:text="Start"
+                ohos:text_color="$color:background"
                 ohos:text_alignment="center"
                 ohos:text_size="16vp"
                 ohos:theme="$pattern:blueButton"
@@ -61,6 +62,7 @@
                 ohos:width="match_content"
                 ohos:layout_alignment="center"
                 ohos:text="Cancel"
+                ohos:text_color="$color:background"
                 ohos:text_alignment="center"
                 ohos:text_size="12vp"
                 ohos:theme="$pattern:blueButton"
