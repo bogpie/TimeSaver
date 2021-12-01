@@ -1,21 +1,23 @@
 package com.timesaver.timesaver.slice;
 
 import com.timesaver.timesaver.ResourceTable;
+import com.timesaver.timesaver.notification.NotificationManager;
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
 import ohos.agp.components.Button;
-import ohos.agp.components.Component;
 import ohos.agp.components.Picker;
 
 public class BreaksSetupSlice extends AbilitySlice {
     static int hour = 1; // default value for debugging
     static int minute;
     int sessionMinutes;
+    NotificationManager notificationManager;
 
     @Override
     public void onStart(Intent intent) {
         super.onStart(intent);
         super.setUIContent(ResourceTable.Layout_ability_breaks_setup);
+        notificationManager = new NotificationManager();
 
         sessionMinutes = hour * 60 + minute;
 
@@ -27,6 +29,7 @@ public class BreaksSetupSlice extends AbilitySlice {
         breakTimePicker.setValue(0);
 
         breaksPicker.setValueChangedListener((newBreaksPicker, breaksLastValue, breaksNextValue) -> {
+            notificationManager.createVibration(false);
             if (breaksNextValue == 0) {
                 breakTimePicker.setMaxValue(0);
                 breakTimePicker.setValue(0);
@@ -38,6 +41,7 @@ public class BreaksSetupSlice extends AbilitySlice {
         });
 
         breakTimePicker.setValueChangedListener((newBreakTimePicker, breakTimeLastValue, breakTimeNextValue) -> {
+            notificationManager.createVibration(false);
             if (breakTimeNextValue == 0) {
                 breaksPicker.setValue(0);
                 breakTimePicker.setMaxValue(0);
@@ -47,6 +51,7 @@ public class BreaksSetupSlice extends AbilitySlice {
         Button buttonToStartTime = (Button) findComponentById(ResourceTable.Id_buttonToStartTime);
         buttonToStartTime.setClickedListener(listener ->
                 {
+                    notificationManager.createVibration(true);
                     TimerSlice.breaks = breaksPicker.getValue();
                     TimerSlice.breakMinutes = breakTimePicker.getValue();
                     TimerSlice.works = breaksPicker.getValue() + 1;
@@ -54,7 +59,6 @@ public class BreaksSetupSlice extends AbilitySlice {
                             (int) ((sessionMinutes - TimerSlice.breakMinutes * TimerSlice.breaks) * 1.0
                                     / TimerSlice.works
                                     * 60 * 1000);
-
                     present(new TimerSlice(), new Intent());
                 }
         );
@@ -62,6 +66,7 @@ public class BreaksSetupSlice extends AbilitySlice {
         Button buttonToGoBack = (Button) findComponentById(ResourceTable.Id_buttonToGoBack);
 
         buttonToGoBack.setClickedListener(listener -> {
+            notificationManager.createVibration(true);
             present(new MainAbilitySlice(), new Intent());
         });
 

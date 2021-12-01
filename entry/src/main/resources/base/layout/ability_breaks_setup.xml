@@ -37,7 +37,7 @@
 
             <Picker
                 ohos:id="$+id:breaks"
-                ohos:height="match_content"
+                ohos:height="match_parent"
                 ohos:width="match_parent"
                 ohos:normal_text_color="$color:faded"
                 ohos:normal_text_size="16fp"
@@ -79,7 +79,7 @@
 
             <Picker
                 ohos:id="$+id:breakTime"
-                ohos:height="match_content"
+                ohos:height="match_parent"
                 ohos:width="match_parent"
                 ohos:max_value="0"
                 ohos:min_value="0"

@@ -19,11 +19,11 @@ public class NotificationManager {
 
     private final VibratorAgent vibratorAgent = new VibratorAgent();
 
-    // private int[] timing = {1000, 1000, 2000, 5000};
-    // private int[] intensity = {50, 100, 200, 255};
-
-    public void createVibration() {
+    public void createVibration(boolean isLong) {
         // Code from official guidelines
+        String vibration = isLong ?
+                VibrationPattern.VIBRATOR_TYPE_WATCH_SYSTEMTYPE_STRENGTH7:
+                VibrationPattern.VIBRATOR_TYPE_WATCH_SYSTEMTYPE_STRENGTH2;
 
         List<Integer> vibratorList = vibratorAgent.getVibratorIdList();
         if (vibratorList.isEmpty()) {
@@ -33,20 +33,16 @@ public class NotificationManager {
 
         // Check whether a specified vibrator supports a preset vibration effect.
         boolean isSupport = vibratorAgent.isEffectSupport(vibratorId,
-                VibrationPattern.VIBRATOR_TYPE_CALL_RING);
+                vibration);
 
         // Create a one-shot vibration with a specified effect.
-        boolean vibrateEffectResult = vibratorAgent.startOnce(vibratorId,
-                VibrationPattern.VIBRATOR_TYPE_CALL_RING);
-
-        // Stop the custom vibration effect of a vibrator.
-        boolean stopResult = vibratorAgent.stop(vibratorId,
-                VibratorAgent.VIBRATOR_STOP_MODE_CUSTOMIZED);
+        if (isSupport) {
+            vibratorAgent.startOnce(vibratorId, vibration);
+        }
     }
 
     public void createNotification(NotificationType type) {
-
-        createVibration();
+        createVibration(true);
 
         String title;
         String text;

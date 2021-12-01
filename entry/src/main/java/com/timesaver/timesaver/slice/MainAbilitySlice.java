@@ -1,6 +1,7 @@
 package com.timesaver.timesaver.slice;
 
 import com.timesaver.timesaver.ResourceTable;
+import com.timesaver.timesaver.notification.NotificationManager;
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
 import ohos.agp.components.Button;
@@ -11,11 +12,13 @@ public class MainAbilitySlice extends AbilitySlice {
     int hour = 0;
     int minute = 0;
     Text setUpSession;
+    NotificationManager notificationManager;
 
     @Override
     public void onStart(Intent intent) {
         super.onStart(intent);
         super.setUIContent(ResourceTable.Layout_ability_main);
+        notificationManager = new NotificationManager();
 
         Button buttonToBreaksSetup = (Button) findComponentById(ResourceTable.Id_buttonToBreaksSetup);
 
@@ -28,6 +31,7 @@ public class MainAbilitySlice extends AbilitySlice {
 
 
         timePicker.setTimeChangedListener((timepicker, hour, minute, second) -> {
+                    notificationManager.createVibration(false);
                     this.hour = hour;
                     this.minute = minute;
                 }
@@ -37,6 +41,8 @@ public class MainAbilitySlice extends AbilitySlice {
         setUpSession.setText("Set up session");
 
         buttonToBreaksSetup.setClickedListener(listener -> {
+                    notificationManager.createVibration(true);
+
                     BreaksSetupSlice.hour = hour;
                     BreaksSetupSlice.minute = minute;
 
