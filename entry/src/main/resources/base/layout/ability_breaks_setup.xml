@@ -71,12 +71,6 @@
                 ohos:text_color="$color:accent"
                 ohos:text_size="12vp"/>
 
-            <!--            <Text
-                            ohos:height="match_content"
-                            ohos:width="match_content"
-                            ohos:text="time"
-                            ohos:text_size="16vp"/>-->
-
             <Picker
                 ohos:id="$+id:breakTime"
                 ohos:height="match_parent"
@@ -126,6 +120,4 @@
 
 
     </DirectionalLayout>
-
-
 </DirectionalLayout>
