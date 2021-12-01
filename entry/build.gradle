@@ -2,6 +2,17 @@ apply plugin: 'com.huawei.ohos.hap'
 apply plugin: 'com.huawei.ohos.decctest'
 //For instructions on signature configuration, see https://developer.harmonyos.com/en/docs/documentation/doc-guides/ide_debug_device-0000001053822404#EN-US_TOPIC_0000001154985555__section1112183053510
 ohos {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_5190040000025123707.p12')
+            storePassword '0000001899724FAA71FDC21BE25BFDC442E43AC419BFFC8210C4A6E5CF31B8F6433EBFFBD15A5FF0'
+            keyAlias = 'debugKey'
+            keyPassword '000000181444A727CBE7D5420E27D5612181299B535EC8DCC1F4F80A0E8419C75D6291929682C429'
+            signAlg = 'SHA256withECDSA'
+            profile file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_timesaver_5190040000025123707.p7b')
+            certpath file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_5190040000025123707.cer')
+        }
+    }
     compileSdkVersion 5
     defaultConfig {
         compatibleSdkVersion 4
@@ -14,7 +25,7 @@ ohos {
             }
         }
     }
-    
+
 }
 
 dependencies {
@@ -35,6 +46,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.1'
 }
 decc {
-    supportType = ['html','xml']
+    supportType = ['html', 'xml']
 }
 apply plugin: 'com.huawei.agconnect'
