@@ -14,18 +14,18 @@ ohos {
             certpath file('C:\\Huawei Files\\TimeSaverReleaseCertificate.cer')
         }
         debug {
-            storeFile file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_5190040000025123707.p12')
-            storePassword '000000186AE0C84B75DA33CEF2443E8E9D37E96E27E3591F16B38EF62D02329BB954F506A58EB701'
+            storeFile file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_timesaver_5190040000025123707.p12')
+            storePassword '00000018AD0A28263E0372BA91063EBF727945C209AB6D710453C85BEDB91D548E1BF34E1F3BEF88'
             keyAlias = 'debugKey'
-            keyPassword '000000181E561586AB3B10F4101239C58EC71CC335EEF6AC22C19E5F0829985E8400D241665646C0'
+            keyPassword '00000018C38E77085BA32461467620DC7211B03B807C6C1F89823D6A6F340AE097E620F45BC59043'
             signAlg = 'SHA256withECDSA'
             profile file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_timesaver_5190040000025123707.p7b')
-            certpath file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_5190040000025123707.cer')
+            certpath file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_timesaver_5190040000025123707.cer')
         }
     }
-    compileSdkVersion 5
+    compileSdkVersion 6
     defaultConfig {
-        compatibleSdkVersion 4
+        compatibleSdkVersion 6
     }
 }
 
@@ -40,8 +40,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.huawei.ohos:hap:2.4.4.2'
-        classpath 'com.huawei.ohos:decctest:1.2.4.0'
+        classpath 'com.huawei.ohos:hap:3.0.3.4'
+        classpath 'com.huawei.ohos:decctest:1.2.6.0'
         classpath 'com.huawei.agconnect:agcp-harmony:1.0.0.300'
 
     }

@@ -1,10 +1,9 @@
 package com.timesaver.timesaver.notification;
 
 
+import com.timesaver.timesaver.MainAbility;
 import ohos.agp.utils.Color;
-import ohos.event.notification.NotificationHelper;
-import ohos.event.notification.NotificationRequest;
-import ohos.event.notification.NotificationSlot;
+import ohos.event.notification.*;
 import ohos.rpc.RemoteException;
 import ohos.vibrator.agent.VibratorAgent;
 import ohos.vibrator.bean.VibrationPattern;
@@ -22,7 +21,7 @@ public class NotificationManager {
     public void createVibration(boolean isLong) {
         // Code from official guidelines
         String vibration = isLong ?
-                VibrationPattern.VIBRATOR_TYPE_WATCH_SYSTEMTYPE_STRENGTH7:
+                VibrationPattern.VIBRATOR_TYPE_WATCH_SYSTEMTYPE_STRENGTH7 :
                 VibrationPattern.VIBRATOR_TYPE_WATCH_SYSTEMTYPE_STRENGTH2;
 
         List<Integer> vibratorList = vibratorAgent.getVibratorIdList();
@@ -41,7 +40,7 @@ public class NotificationManager {
         }
     }
 
-    public void createNotification(NotificationType type) {
+    public void createNotification(NotificationType type, int seconds) {
         createVibration(true);
 
         String title;
@@ -66,33 +65,40 @@ public class NotificationManager {
             default:
                 throw new IllegalStateException("Unexpected value: " + type);
         }
-
         NotificationSlot slot = new NotificationSlot("slot_001", "slot_default", NotificationSlot.LEVEL_HIGH);
         slot.setEnableVibration(true);
-        slot.setLockscreenVisibleness(NotificationRequest.VISIBLENESS_TYPE_PUBLIC);
+        // slot.setLockscreenVisibleness(NotificationRequest.VISIBLENESS_TYPE_PUBLIC);
         slot.setEnableLight(true);
         slot.setLedLightColor(Color.BLUE.getValue());
 
         try {
-            NotificationHelper.addNotificationSlot(slot);
+            // NotificationHelper.addNotificationSlot(slot);
+            ReminderHelper.addNotificationSlot(slot);
         } catch (RemoteException ex) {
             ex.printStackTrace();
         }
 
-        int notificationId = 1;
-        NotificationRequest request = new NotificationRequest(notificationId);
+        ReminderRequest request = new ReminderRequestTimer(seconds);
         request.setSlotId(slot.getId());
 
-        NotificationRequest.NotificationNormalContent content = new NotificationRequest.NotificationNormalContent();
-        content.setTitle(title)
-                .setText(text);
-        NotificationRequest.NotificationContent notificationContent = new NotificationRequest.NotificationContent(content);
-        request.setContent(notificationContent);
+//        NotificationRequest.NotificationNormalContent content = new NotificationRequest.NotificationNormalContent();
+
+        request.setTitle(title)
+                .setContent(text);
+
+        request.setRingDuration(10);
+
+        // NotificationRequest.NotificationContent notificationContent = new NotificationRequest.NotificationContent(content);
+        // request.setContent(notificationContent);
+
+        request.setIntentAgent("com.timesaver.timesaver", MainAbility.class.getName());
+
+        request.setActionButton("close", ReminderRequest.ACTION_BUTTON_TYPE_CLOSE);
 
         try {
-            NotificationHelper.publishNotification(request);
-        } catch (RemoteException ex) {
-            ex.printStackTrace();
+            ReminderHelper.publishReminder(request);
+        } catch (ReminderManager.AppLimitExceedsException | ReminderManager.SysLimitExceedsException | RemoteException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -4,18 +4,18 @@ apply plugin: 'com.huawei.ohos.decctest'
 ohos {
     signingConfigs {
         debug {
-            storeFile file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_5190040000025123707.p12')
-            storePassword '0000001899724FAA71FDC21BE25BFDC442E43AC419BFFC8210C4A6E5CF31B8F6433EBFFBD15A5FF0'
+            storeFile file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_timesaver_5190040000025123707.p12')
+            storePassword '000000188D7E93C4C80985E5120759309EC9BB872F290B9295C24392E8B94D5AE9A700EB6000DBCE'
             keyAlias = 'debugKey'
-            keyPassword '000000181444A727CBE7D5420E27D5612181299B535EC8DCC1F4F80A0E8419C75D6291929682C429'
+            keyPassword '00000018E9A9D52C1744207DB11A25303499466B432C6F18D97EB92BC2993041D3512E633A6FBC2C'
             signAlg = 'SHA256withECDSA'
             profile file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_timesaver_5190040000025123707.p7b')
-            certpath file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_5190040000025123707.cer')
+            certpath file('C:\\Users\\bogdan.piele\\.ohos\\config\\auto_debug_timesaver_5190040000025123707.cer')
         }
     }
-    compileSdkVersion 5
+    compileSdkVersion 6
     defaultConfig {
-        compatibleSdkVersion 4
+        compatibleSdkVersion 6
     }
     buildTypes {
         release {

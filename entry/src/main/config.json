@@ -5,6 +5,11 @@
     "version": {
       "code": 1000001,
       "name": "1.0.1"
+    },
+    "apiVersion": {
+      "compatible": 5,
+      "target": 6,
+      "releaseType": "Release"
     }
   },
   "deviceConfig": {},

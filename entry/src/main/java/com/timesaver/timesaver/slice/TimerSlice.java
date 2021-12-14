@@ -6,6 +6,7 @@ import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
 import ohos.agp.components.*;
 import ohos.event.notification.NotificationHelper;
+import ohos.event.notification.ReminderHelper;
 import ohos.rpc.RemoteException;
 
 import java.time.Duration;
@@ -43,12 +44,23 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         return LocalTime.parse(tickTimer.getText()).toSecondOfDay() * 1000;
     }
 
+    private NotificationManager.NotificationType getType() {
+        if (works == 0) {
+            return NotificationManager.NotificationType.FINISHED;
+        }
+        if (isWork) {
+            return NotificationManager.NotificationType.BREAK;
+        }
+        return NotificationManager.NotificationType.WORK;
+    }
+
     private void startTimer() {
         tickTimer.setBaseTime(getMilliSecondsFromMidnight() - getTickTimerMillis());
         tickTimer.start();
         startButton.setText("Pause");
         isStarted = true;
         updateActualTimer();
+        notificationManager.createNotification(getType(), (int) (getRemainingMillis() / 1000));
     }
 
     private void pauseTimer() {
@@ -56,6 +68,11 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         startButton.setText("Start");
         isStarted = false;
         updateActualTimer();
+        try {
+            ReminderHelper.cancelAllReminders(); // remove all reminders
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -79,8 +96,8 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         roundProgressBar.setProgressValue(100 - progress);
 
         --breaks;
-        if (breaks != 0)
-            notificationManager.createNotification(NotificationManager.NotificationType.WORK);
+//        if (breaks != 0)
+//            notificationManager.createNotification(NotificationManager.NotificationType.WORK);
 
         isWork = true;
         stopTimer();
@@ -95,8 +112,8 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         roundProgressBar.setProgressValue(100 - progress);
 
         --works;
-        if (works != 0)
-            notificationManager.createNotification(NotificationManager.NotificationType.BREAK);
+//        if (works != 0)
+//            notificationManager.createNotification(NotificationManager.NotificationType.BREAK);
 
         isWork = false;
         stopTimer();
@@ -112,13 +129,17 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         stopTimer();
     }
 
-
-    private void updateActualTimer() {
+    private long getRemainingMillis() {
         LocalTime elapsedTime = LocalTime.parse(tickTimer.getText());
         LocalTime finalTime = LocalTime.ofSecondOfDay(currentCycleMilliSeconds / 1000);
-        long remainingMillis = Duration.between(elapsedTime, finalTime).toMillis();
+        return Duration.between(elapsedTime, finalTime).toMillis();
+    }
 
-        String actualTimerString = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(remainingMillis),
+    private void updateActualTimer() {
+        long remainingMillis = getRemainingMillis();
+
+        String
+                actualTimerString = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(remainingMillis),
                 TimeUnit.MILLISECONDS.toMinutes(remainingMillis) % TimeUnit.HOURS.toMinutes(1),
                 TimeUnit.MILLISECONDS.toSeconds(remainingMillis) % TimeUnit.MINUTES.toSeconds(1));
 
@@ -129,7 +150,7 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
         cycleType.setText("Finished!");
         actualTimer.setText("00:00:00");
         isFinished = true;
-        notificationManager.createNotification(NotificationManager.NotificationType.FINISHED);
+//        notificationManager.createNotification(NotificationManager.NotificationType.FINISHED);
     }
 
     @Override
@@ -211,7 +232,12 @@ public class TimerSlice extends AbilitySlice implements Component.ClickedListene
             }
         }
         if (component == cancelButton) {
-            if(isStarted){
+            try {
+                ReminderHelper.cancelAllReminders(); // remove all reminders
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+            if (isStarted) {
                 stopTimer();
             }
             present(new MainAbilitySlice(), new Intent());
